@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <title>Search</title>
+        <style>
+            *{
+                box-sizing: border-box;
+            }
+            @font-face {
+                font-family: "Berk" ;
+                src: url(BerkshireSwash-Regular.ttf);
+            }
+            .kevin{
+                max-width: 1000px;
+                width: 100%;
+                margin: 100px  auto 0 auto;
+                text-align: center;
+            }
+            .kevin span{
+                font-size: 80pt;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                text-align: center;
+                display:inline-block;
+                text-align: center;
+                font-family: Berk;
+                
+            }
+
+            .kevin span:nth-of-type(1){
+                color: #0091ea;
+            }
+            .kevin span:nth-of-type(2){
+                color: #00e676;
+            }
+            .kevin span:nth-of-type(3){
+                color: #0091ea;
+            }
+            .kevin span:nth-of-type(4){
+                color: #00e676;
+            }
+            .kevin span:nth-of-type(5){
+                color: #fbc02d;
+            }
+
+            .kevin form input{
+                padding-left: 40px;
+                height: 30px;
+                margin-top: 20px;
+                border-radius: 40px;
+                border: 1px solid #ccc;
+                outline: 0;
+            }
+
+            .kevin form div#livesearch{
+                width: 540px;
+                border-left: 1px solid #ccc;
+                border-bottom: 1px solid #ccc;
+                border-right: 1px solid #ccc;
+                /*border-radius:40px;*/
+                border-bottom-left-radius: 40px;
+                border-bottom-right-radius: 40px;
+                top:0px;
+                left: 230px;
+                position: relative;
+                text-align: left;
+                padding: 5px 0 10px 30px;
+                display: none;
+            }
+
+            .kevin form input:focus{
+                border: 1px solid #00e676;
+            }
+            
+            .inputDiv{
+                position: relative;
+            }
+            form i{
+                position: absolute;
+                left: 240px;
+                top: 28px;
+                z-index: 1;
+                color: #fbc02d;
+            }
+
+            .real{
+                text-decoration: none;
+                color: black;
+                display: block;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <div class="kevin">
+            <span>K</span><span>E</span><span>V</span><span>I</span><span>N</span>
+            <form>
+                <div class="inputDiv" >
+                    <input type="text" size="80" onkeyup="search(this.value);"/>
+                    <i class="fa fa-search"></i>
+                    <div id="livesearch"></div>
+                </div>
+            </form>
+        </div>
+        
+    
+
+    <script>
+        function search(valor){
+            if(valor.length == 0){
+                document.getElementById("livesearch").innerHTML = " ";
+                document.getElementById("livesearch").style.display = "none";
+                return;
+            }else{
+                document.getElementById("livesearch").style.display = "block";
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function(){
+                    if(xhttp.readyState == 4 && xhttp.status == 200){
+                        document.getElementById("livesearch").innerHTML ='<a class="real" href="">' +xhttp.responseText+'<a/>';
+                    }
+                };
+                xhttp.open("GET","search.php?q="+valor, true);
+                xhttp.send(); 
+            }
+        }
+
+        
+
+       // document.getElementsByTagName("input")[0].onkeyup = function(){
+       //   document.getElementById("livesearch").style.display = "block";
+       // }
+    </script>
+    </body>
+</html>
